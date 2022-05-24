@@ -2,7 +2,16 @@
 ROOT = ../Lib
 
 # Compiler and default flags
-CXX = g++
+
+ARCH=arm 
+ifneq ($(arch), armv7l)
+	CROSS_COMPILE=arm-linux-gnueabihf-
+	CXX=arm-linux-gnueabihf-g++
+	LD=arm-linux-gnueabihf-ld
+	CC=arm-linux-gnueabihf-gcc
+else
+	CXX=g++
+endif
 CXX_FLAGS = -fpermissive -Wconversion -std=c++0x -I $(ROOT)
 
 # Object directory
